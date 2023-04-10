@@ -19,7 +19,6 @@ struct HomeView: View {
                 
                 NavigationLink(destination: ProductDetailView(productDetailViewModel: ProductDetailViewModel(withProduct: product))) {
                     let product = ProductCell(withProduct: product)
-                    
                       ProductCellView(product: product)
                     }
                 

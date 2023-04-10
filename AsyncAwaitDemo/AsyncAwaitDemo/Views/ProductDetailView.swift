@@ -24,7 +24,7 @@ struct ProductDetailView: View {
                 //                        .imageModifier()
                 //                }
                 
-                AsyncImage(url: URL(string: imgURL), transaction: Transaction(animation: .spring())) { phase in
+                AsyncImage(url: URL(string: imgURL), transaction: Transaction(animation: .easeIn)) { phase in
                     switch phase {
                     case .success(let image):
                         image.imageModifier()
