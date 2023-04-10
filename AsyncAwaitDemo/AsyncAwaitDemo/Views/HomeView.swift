@@ -16,8 +16,14 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 10) {
 
             List(viewModel.arrOfProducts , id: \.id) { product in
-              let product = ProductCell(withProduct: product)
-                 ProductCellView(product: product)
+                
+                NavigationLink(destination: ProductDetailView(productDetailViewModel: ProductDetailViewModel(withProduct: product))) {
+                    let product = ProductCell(withProduct: product)
+                    
+                      ProductCellView(product: product)
+                    }
+                
+              
             }
         }
         .padding()
@@ -26,7 +32,13 @@ struct HomeView: View {
                 viewModel.input = .getAllProducts
             }
         }
+        .onAppear(perform: getAllProducts)
     }
+    
+    private func getAllProducts() {
+        viewModel.input = .getAllProducts
+    }
+    
 }
 
 struct HomeView_Previews: PreviewProvider {

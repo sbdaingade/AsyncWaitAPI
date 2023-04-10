@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import SwiftUI
+import Combine
 
 public enum ProductError: Error, CustomStringConvertible {
     case unknownError
@@ -30,4 +32,21 @@ extension UIImage {
             return await self.byPreparingThumbnail(ofSize: size)!
         }
     }
+}
+
+
+extension Image {
+    
+    func imageModifier() -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+    }
+    
+//    func iconModifier() -> some View {
+//        self
+//            .iconModifier()
+//            .frame(maxWidth: 128)
+//            .foregroundColor(.purple)
+//    }
 }

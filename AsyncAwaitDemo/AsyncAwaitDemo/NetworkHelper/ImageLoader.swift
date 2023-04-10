@@ -18,11 +18,9 @@ class ImageLoader: ObservableObject {
     }
     
     init(imageURL: String) {
-        do {
             Task {
                 newImage = try await fetchImage(for: imageURL)
             }
-        }
     }
     
     private func fetchImage(for urlString: String) async throws -> UIImage {
