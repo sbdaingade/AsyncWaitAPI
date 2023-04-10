@@ -10,18 +10,37 @@ import Combine
 
 struct ProductDetailView: View {
     @ObservedObject var productDetailViewModel:  ProductDetailViewModel
-  
+    
     var body: some View {
         VStack {
             
             List(productDetailViewModel.images, id: \.self) { imgURL in
-                AsyncImage(url: URL(string: imgURL)) { img in
-                    img
-                        .imageModifier()
-                    
-                } placeholder: {
-                    Image(systemName: "mountain.2")
-                        .imageModifier()
+                //                AsyncImage(url: URL(string: imgURL)) { img in
+                //                    img
+                //                        .imageModifier()
+                //
+                //                } placeholder: {
+                //                    Image(systemName: "mountain.2")
+                //                        .imageModifier()
+                //                }
+                
+                AsyncImage(url: URL(string: imgURL), transaction: Transaction(animation: .spring())) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.imageModifier()
+                           // .transition(.move(edge: .top))
+                          //  .transition(.slide)
+                            .transition(.scale)
+                    case .failure (_):
+                        Image("ant")
+                            .imageModifier()
+                    case .empty:
+                        Image("photo")
+                            .imageModifier()
+                    @unknown default:
+                        ProgressView()
+                            .foregroundColor(.purple)
+                    }
                 }
             }
         }
